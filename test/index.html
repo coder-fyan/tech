@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浪</title>
+    <style>
+        .box {height: 200px; width: 100px;position: absolute;top: 50%;left: 50%;overflow: hidden;transform: translate(-50%, -50%);background: linear-gradient(blue, green);}
+        .rotate {position: absolute;width: 200px; height: 200px; left: -50px; top: -50px;background-color: white;}
+        .rotateOne{border-radius: 80px;transform: rotate(45deg);animation: ani 5s linear infinite;}
+        .rotateTwo{border-radius: 70px;transform: rotate(90deg);animation: ani 6s linear infinite;}
+        /* .rotateThree{border-radius: 60px;transform: rotate(135deg);animation: ani 7s linear infinite;} */
+        /* .rotateFour{border-radius: 50px;transform: rotate(175deg);animation: ani 8s linear infinite;} */
+        @keyframes ani {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- <embed src="images/2.pdf" width="200px"height="100px"/>
+    <div class="box">
+        <div class="rotate rotateOne"></div>
+        <div class="rotate rotateTwo"></div>
+        <div class="rotate rotateThree"></div>
+        <div class="rotate rotateFour"></div>
+    </div> -->
+
+
+    <form submit="submit()">
+        <input type="text" />
+        <button type="submit">提交</button>
+    </form>
+
+</body>
+<script>
+    function submit() {
+        console.log("添加");
+    }
+</script>
+</html>

@@ -1,0 +1,163 @@
+<script>
+    let parent = document.querySelector("head")
+    let li = document.createElement("link");
+    li.rel = "stylesheet";
+    li.href = "./css/index.css"
+    parent.prepend(li);
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .outer{height: 300px; width: 300px;background-color: violet;position: fixed;}
+        .inner{height: 100px; width: 100px;background-color: teal;margin: 150px;border: 50px;}
+    </style>
+</head>
+<body>
+    <div class="outer"id="outerJS">
+        <div class="inner" onclick="pos(event)"></div>
+    </div>
+    <iframe src="https://sources.ikeepstudying.com/jquery.media/guice.pdf" frameborder="0"></iframe>
+</body>
+<script>
+    let inner = document.querySelector(".inner");
+    let outer = document.querySelector(".outer");
+    console.log(inner.offsetParent, inner.offsetTop, inner.offsetLeft)
+    function pos (e) {
+        console.log(e, e.screenX)
+    }
+    console.log(outerJS)
+    // let arr = [], s = new Set();
+    // function creatItem () {
+    //     let rdm = 2 + 30 * Math.random();
+    //     s.add(Math.floor(rdm));
+    //     if (s.size < 5) {
+    //         creatItem ();
+    //     } else {
+    //         arr = [...s];
+    //     }
+    // }
+    // creatItem();
+    // console.log(arr);
+
+
+    //函数的变量提升
+    // a();
+    // b();
+    // c();
+    // function a () {
+    //     console.log("a", a);
+    // }
+
+    // var b = function c () {
+    //     console.log(b, c);
+    // } 
+    // a();
+    // b();
+    // c();
+
+
+    // function A () {this.a="a";this.b="b"};
+    // function B () {this.a= "a";this.b="b";return {e:"e"}};
+    // function C () {this.a = "a";this.b="b";return "g"};
+    // console.log(new A(), new B(), new C())
+
+    // class C {
+    //     static a = "a";
+    //     b = "b";
+    //     constructor () {
+    //         this.b = "g";
+    //         this.c = "c"
+    //     }
+    //     d () {
+    //         console.log("d")
+    //     }
+    // }
+    // var instant = new C();
+    // var instant2 = new C();
+    // Object.defineProperty(instant,"e",{
+    //     value: "e"
+    // })
+    // instant.f = "f";
+    // console.log(instant);
+    // console.log(instant2);
+
+    // var b = {};
+    // b.a = "a";
+    // Object.defineProperty(b, "c", {
+    //     value: "c"
+    // });
+    // console.log(Object.getOwnPropertyDescriptor(b, "a"));
+    // console.log(Object.getOwnPropertyDescriptor(b, "c"))
+    
+    //观察者模式
+    // class Subject {
+    //     constructor (name) {
+    //         this.subscribes = [];
+    //         this.name = name
+    //     }
+
+    //     subscribe (obj) {
+    //         this.subscribes.push(obj);
+    //     }
+
+    //     unSubscribe (obj)  {
+    //         let idx = this.subscribes.indexOf(obj);
+    //         this.subscribes.splice(idx, 1);
+    //     }
+
+    //     notify () {
+    //         let sub = this;
+    //         this.subscribes.forEach (item => {
+    //             item.update(sub.name)
+    //         })
+    //     }
+    // }
+
+    // class Observe {
+    //     constructor (name) {
+    //         this.name = name
+    //     }
+    //     update (from) {
+    //         console.log(this.name + " get news from " + from);
+    //     }
+    // }
+
+    // let sub1 = new Subject("one");
+    // let obs1 = new Observe("obs1");
+    // let obs2 = new Observe("obs2");
+    // sub1.subscribe(obs1);
+    // sub1.subscribe(obs2);
+    // sub1.notify();
+    // sub1.unSubscribe(obs1);
+    // sub1.notify();
+
+
+    //发布订阅模式
+    // class publishCenter {
+    //     constructor () {
+    //         this.works = {}
+    //     }
+
+    //     publishWork (name, fun) {
+    //         if (!this.works[name]) this.works[name] = [];
+    //         this.works[name].push(fun);
+    //     }
+
+    //     justDoIt (name)  {
+    //         if (!this.works[name]) {
+    //             console.log("还没有这类型的发布哦")
+    //         }
+    //         this.works.forEach(item => {
+    //             item()
+    //         });
+    //     }
+    // }   
+
+    
+</script>
+</html>

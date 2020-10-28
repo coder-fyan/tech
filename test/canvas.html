@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/exif.js"></script>
+    <title>Document</title>
+    <style>
+        canvas{width: 200px;height: 500px;}
+    </style>
+</head>
+<body>
+    <input type="file" name="file" id="uploadFile" onchange="fileUpload()"/>
+    <canvas id="forImg" height="500" width="200"></canvas>
+    <img src="" alt="" srcset="" id="img1"/>
+    <img src="" alt="" srcset="" id="img2"/>
+</body>
+<script>
+    (function (global) {
+        let img1 = document.getElementById("img1");
+        let img2 = document.getElementById("img2");
+        let inp = document.getElementById("uploadFile");
+        let canvas =  document.getElementById("forImg");
+        let ctx = canvas.getContext('2d');
+        let Orientation = null;
+        global.fileUpload = function () {
+            let curImg = inp.files[0];
+            let img  = new Image();
+            let type = curImg.type;
+            EXIF.getData(curImg, function(ar) {  
+                console.log(ar);
+                // Orientation = EXIF.getTag(this, 'Orientation');
+                Orientation = ar;
+            });
+            img.onload = function () {
+                console.log(this.height,this.width);
+                let imgHeight = this.height, imgWidth = this.width;
+                if (this.width > 1080) {
+                    imgWidth = 1080;
+                    imgHeight = Math.ceil(1080 * this.height / this.width);
+                }
+                canvas.height = imgHeight;
+                canvas.width = imgWidth;
+               
+                if(Orientation && Orientation != 1){
+                    
+                    switch(Orientation){
+                        case 6:     // 旋转90度
+                            canvas.width = imgHeight;    
+                            canvas.height = imgWidth;    
+                            ctx.rotate(Math.PI / 2);
+                            // (0,-imgHeight) 从旋转原理图那里获得的起始点 
+                            ctx.drawImage(this, 0, -imgHeight, imgWidth, imgHeight);
+                            break;
+                        case 3:     // 旋转180度
+                            ctx.rotate(Math.PI);    
+                            ctx.drawImage(this, -imgWidth, -imgHeight, imgWidth, imgHeight);
+                            break;
+                        case 8:     // 旋转-90度
+                            canvas.width = imgHeight;    
+                            canvas.height = imgWidth;    
+                            ctx.rotate(3 * Math.PI / 2);    
+                            ctx.drawImage(this, -imgWidth, 0, imgWidth, imgHeight);
+                            break;
+                    }
+                }else{
+                    ctx.drawImage(this, 0, 0, imgWidth, imgHeight);
+                }
+                ctx.drawImage(this, 0, 0, imgWidth, imgHeight);
+                console.log(canvas.toDataURL());
+                console.log(URL.createObjectURL(curImg));
+                canvas.toBlob(function (blob) {
+                    blob.name = new Date().getTime();
+                    console.log(blob);
+                    img2.src = URL.createObjectURL(blob);
+                }, type, 1)
+            }
+            img.src = URL.createObjectURL(curImg);
+            img1.src = URL.createObjectURL(curImg);
+        }
+    })(window)
+</script>
+</html>

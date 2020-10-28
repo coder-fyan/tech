@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,body{position: relative;}
+        .layer{position: absolute;left: 0;top: 0;right: 0;bottom: 0;height: 100px;width: 100px;background-color: green;margin: auto;}
+    </style>
+</head>
+<body>
+    <div class="layer"></div>
+</body>
+<script>
+    let dom = document.querySelector(".layer");
+    console.log(dom.parentElement)
+</script>
+</html>
